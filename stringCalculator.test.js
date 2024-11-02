@@ -1,6 +1,6 @@
 function add(input) {
     if (input === "") return 0;
-    const numbers = input.split(',').map(Number);
+    const numbers = input.split(/[\n,]/).map(Number);
     return numbers.reduce((acc, num) => acc + num, 0);
 }
 
@@ -17,5 +17,15 @@ describe("String Calculator - Basic Functionality", () => {
 
     test("should return the sum of two comma-separated numbers", () => {
         expect(add("1,5")).toBe(6);
+    });
+});
+
+describe("String Calculator - Advanced Functionality", () => {
+    test("should handle an unknown amount of numbers", () => {
+        expect(add("1,2,3,4")).toBe(10);
+    });
+
+    test("should handle new lines between numbers", () => {
+        expect(add("1\n2,3")).toBe(6);
     });
 });
